@@ -1,0 +1,32 @@
+.env
+.vscode
+
+*.pyc
+.DS_Store
+__pycache__
+
+venv/
+
+.streamlit/
+
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# IDE
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

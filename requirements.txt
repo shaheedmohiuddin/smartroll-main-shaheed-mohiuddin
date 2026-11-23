@@ -1,0 +1,26 @@
+streamlit #for web app development
+
+#utilities
+pandas #for data manipulation
+numpy #for numerical computations
+
+#face recognition
+scikit-learn #for machine learning
+dlib-bin # for face detection
+
+#face recognition models
+git+https://github.com/ageitgey/face_recognition_models
+setuptools<70.0.0   
+
+supabase # for database
+
+bcrypt #for password hashing
+
+segno #for QR code generation
+
+pillow #for image processing
+
+
+
+librosa 
+resemblyzer
