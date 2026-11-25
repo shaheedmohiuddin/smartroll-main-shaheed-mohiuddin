@@ -104,7 +104,6 @@ def _render_bottom_summary():
 
 def home_screen() -> None:
     header_home()
-    set_toolbar_visibility(True)
     style_background_home()
     style_base_layout()
     _apply_home_styles()

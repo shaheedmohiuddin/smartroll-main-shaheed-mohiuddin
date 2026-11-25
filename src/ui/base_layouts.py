@@ -1,4 +1,3 @@
-
 import streamlit as st
 
 SMARTROLL_CSS = """
@@ -13,18 +12,18 @@ html,body,[class*="css"],button {font-family:'Plus Jakarta Sans',Inter,sans-seri
 .stApp {background:var(--sr-bg) !important;color:var(--sr-text) !important;}
 header[data-testid="stHeader"]{display:flex!important;visibility:visible!important;background:transparent!important;}
 
-/* Keep Streamlit controls visible while developing and testing UI changes. */
+/* Hide Streamlit toolbar & chrome by default; toggle with set_toolbar_visibility(True) */
 [data-testid="stToolbar"],
 [data-testid="stMainMenu"],
 .stDeployButton,
 [data-testid="stDecoration"],
 #MainMenu,
 footer {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    height: auto !important;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    height: 0 !important;
 }
 
 /* Horizontal padding reduced; vertical padding unchanged */
@@ -115,44 +114,68 @@ input,textarea{background:#FFFFFF!important;color:var(--sr-text)!important;borde
 </style>
 """
 
+
 def style_background_home():
- st.markdown(SMARTROLL_CSS,unsafe_allow_html=True)
+    st.markdown(SMARTROLL_CSS, unsafe_allow_html=True)
+
 
 def style_background_dashboard():
- st.markdown(SMARTROLL_CSS,unsafe_allow_html=True)
+    st.markdown(SMARTROLL_CSS, unsafe_allow_html=True)
+
 
 def style_base_layout():
- st.markdown(SMARTROLL_CSS,unsafe_allow_html=True)
+    st.markdown(SMARTROLL_CSS, unsafe_allow_html=True)
 
 
-def set_toolbar_visibility(visible: bool = True) -> None:
+def set_toolbar_visibility(visible: bool = False) -> None:
     """
     Show or hide Streamlit's toolbar and related controls.
 
-    Keep visible=True during development so you can access the Streamlit
-    menu and inspect/reload the app while making UI changes.
+    Defaults to False (hidden). Pass visible=True during development
+    so you can access the Streamlit menu and inspect/reload the app.
     """
-    toolbar_display = "flex" if visible else "none"
-    toolbar_visibility = "visible" if visible else "hidden"
-
-    st.markdown(
-        f"""
-        <style>
-        header[data-testid="stHeader"] {{
-            display: flex !important;
-            visibility: visible !important;
-        }}
-        [data-testid="stToolbar"],
-        [data-testid="stMainMenu"],
-        .stDeployButton,
-        [data-testid="stDecoration"],
-        #MainMenu {{
-            display: {toolbar_display} !important;
-            visibility: {toolbar_visibility} !important;
-            opacity: 1 !important;
-            pointer-events: auto !important;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+    if visible:
+        st.markdown(
+            """
+            <style>
+            header[data-testid="stHeader"] {
+                display: flex !important;
+                visibility: visible !important;
+                background: transparent !important;
+            }
+            [data-testid="stToolbar"],
+            [data-testid="stMainMenu"],
+            .stDeployButton,
+            [data-testid="stDecoration"],
+            #MainMenu,
+            footer {
+                display: flex !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                pointer-events: auto !important;
+                height: auto !important;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown(
+            """
+            <style>
+            [data-testid="stToolbar"],
+            [data-testid="stMainMenu"],
+            .stDeployButton,
+            [data-testid="stDecoration"],
+            #MainMenu,
+            footer {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+                height: 0 !important;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
