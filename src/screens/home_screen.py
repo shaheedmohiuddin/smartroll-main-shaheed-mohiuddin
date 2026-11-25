@@ -82,11 +82,9 @@ def _render_highlights() -> None:
             """, unsafe_allow_html=True)
 
 
-def _render_bottom_summary() -> None:
-    st.markdown(
-        """
-        <section class="sr-bottom-summary">
-
+def _render_bottom_summary():
+    st.html("""
+        <div class="sr-bottom-summary">
             <p>
                 Fast attendance tracking, clear records, and simpler
                 class management. Select your workspace to continue.
@@ -99,11 +97,9 @@ def _render_bottom_summary() -> None:
             <div class="sr-footer-credit">
                 Powered by AI · Designed for smarter classrooms
             </div>
-
-        </section>
-        """,
-        unsafe_allow_html=True
-    )
+        </div>
+    """)
+    
 
 
 def home_screen() -> None:
