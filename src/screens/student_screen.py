@@ -40,7 +40,13 @@ def student_dashboard():
         del st.session_state.student_data
         st.rerun()
 
-    st.markdown("### Your Learning Overview")
+    st.markdown(
+        '<div class="sr-section-heading">'
+        '<span class="sr-section-dot"></span>'
+        '<span>Your Learning Overview</span>'
+        '</div>',
+        unsafe_allow_html=True,
+    )
 
     st.divider()
 
@@ -86,13 +92,22 @@ def student_dashboard():
     with metric_cols[2]:
         st.metric("Overall Attendance", f"{overall_pct}%")
 
-    st.markdown("### Your Enrolled Subjects")
-    title_cols = st.columns([3, 1])
+    title_cols = st.columns([3, 1], vertical_alignment="center")
+
+    with title_cols[0]:
+        st.markdown(
+            '<div class="sr-section-heading sr-enrolled-heading">'
+            '<span class="sr-section-dot"></span>'
+            '<span>Your Enrolled Subjects</span>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
+
     with title_cols[1]:
         if st.button(
             "＋ Enroll in Subject",
             type="primary",
-            width="stretch"
+            width="content",
         ):
             enroll_dialog()
 
@@ -217,19 +232,20 @@ def student_screen():
             margin: 1rem 0 1.2rem 0;
         }
         .smartroll-welcome-label {
-            color: #22D3EE;
+            color: #6D5BD0 !important;
             font-size: .72rem;
             font-weight: 800;
             letter-spacing: .13em;
             margin-bottom: .4rem;
         }
         .smartroll-welcome h2 {
-            color: #F1F5F9 !important;
+            color: #25243A !important;
             margin: 0 !important;
             font-size: 1.65rem !important;
+            text-align: left !important;
         }
         .smartroll-welcome p {
-            color: #94A3B8 !important;
+            color: #5F6078 !important;
             margin: .35rem 0 0 0 !important;
         }
         </style>
@@ -265,7 +281,7 @@ def student_screen():
     st.markdown("""
         <style>
         .register-title {
-            color: #F1F5F9 !important;
+            color: #25243A !important;
             font-family: 'Inter', sans-serif !important;
             font-size: 3rem !important;
             font-weight: 700 !important;

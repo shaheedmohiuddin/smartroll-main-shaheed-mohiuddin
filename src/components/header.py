@@ -15,7 +15,7 @@ def _apply_header_styles() -> None:
         .sr-header-logo {
             object-fit: cover;
             border-radius: 22px;
-            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.34);
+            box-shadow: 0 10px 28px rgba(54, 45, 100, 0.10);
         }
 
         /* Home header */
@@ -36,7 +36,7 @@ def _apply_header_styles() -> None:
             text-align: center;
         }
         .sr-header-title span {
-            background: linear-gradient(95deg, #F8FAFC 10%, #60A5FA 52%, #22D3EE 95%);
+            background: linear-gradient(95deg, #25243A 10%, #7866D8 52%, #9B8AF0 95%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -58,7 +58,7 @@ def _apply_header_styles() -> None:
             margin: 0;
         }
         .sr-header-dash-title span {
-            background: linear-gradient(95deg, #F8FAFC 10%, #60A5FA 52%, #22D3EE 95%);
+            background: linear-gradient(95deg, #25243A 10%, #7866D8 52%, #9B8AF0 95%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -68,7 +68,7 @@ def _apply_header_styles() -> None:
             font-weight: 700;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: #22D3EE;
+            color: #7866D8;
             margin-left: 0.65rem;
         }
         </style>
@@ -100,7 +100,7 @@ def header_dashboard(role_label: str | None = None) -> None:
     st.markdown(
         f"""
         <div class="sr-header-dash">
-            <img src="{LOGO_URL}" alt="SmartRoll Logo" class="sr-header-logo" style="height:72px; width:72px;" />
+            <img src="{LOGO_URL}" alt="SmartRoll Logo" class="sr-header-logo" style="height:112px; width:112px;" />
             <h2 class="sr-header-dash-title"><span>SMARTROLL</span>{badge_html}</h2>
         </div>
         """,

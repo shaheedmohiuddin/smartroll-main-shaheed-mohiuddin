@@ -29,67 +29,138 @@ def teacher_screen():
     elif st.session_state.teacher_login_type=='register':
         teacher_screen_register()
 
-    
+ 
 def teacher_dashboard():
     teacher_data = st.session_state.teacher_data
 
-    # SmartRoll teacher dashboard header
-    st.markdown("""
-        <div style="padding: 8px 0 20px 0;">
-            <div style="font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
-                       color: #22D3EE; font-weight: 700; margin-bottom: 8px;">
+    # SmartRoll Teacher Dashboard Header
+    st.html("""
+        <div style="padding:8px 0 20px 0;">
+            <div style="
+                font-size:13px;
+                letter-spacing:2px;
+                text-transform:uppercase;
+                color:#7866D8;
+                font-weight:700;
+                margin-bottom:8px;">
                 SMARTROLL • TEACHER WORKSPACE
             </div>
-            <div style="font-size: 30px; font-weight: 750; color: #F1F5F9; line-height: 1.2;">
-                Your classroom, <span style="color:#60A5FA;">in control.</span>
+
+            <div style="
+                font-size:30px;
+                font-weight:750;
+                color:#25243A;
+                line-height:1.2;">
+                Your classroom,
+                <span style="color:#7866D8;">In control.</span>
             </div>
-            <div style="color:#94A3B8; font-size:15px; margin-top:8px;">
+
+            <div style="
+                color:#4B5563;
+                font-size:15px;
+                margin-top:8px;">
                 Manage classes and take AI-powered attendance in one place.
             </div>
         </div>
-    """, unsafe_allow_html=True)
+    """)
 
+    # Welcome message and logout
     c1, c2 = st.columns([3, 1], vertical_alignment="center")
+
     with c1:
-        st.markdown(f"<div style='color:#E2E8F0;font-size:17px;font-weight:600;'>Welcome back, {teacher_data['name']} 👋</div>", unsafe_allow_html=True)
+        st.markdown(
+            f"""
+            <div style="
+                color:#25243A;
+                font-size:17px;
+                font-weight:600;">
+                Welcome back, {teacher_data['name']} 👋
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
     with c2:
-        if st.button("Logout", type="secondary", key="loginbackbtn", width="stretch", shortcut='control+backspace'):
+        if st.button(
+            "Logout",
+            type="secondary",
+            key="loginbackbtn",
+            width="stretch",
+            shortcut="control+backspace"
+        ):
             st.session_state["is_logged_in"] = False
             del st.session_state.teacher_data
             st.rerun()
 
     st.space()
 
+    # Initialize active dashboard tab
     if "current_teacher_tab" not in st.session_state:
-        st.session_state.current_teacher_tab = 'take_attendance'
+        st.session_state.current_teacher_tab = "take_attendance"
+
+    # Dashboard navigation
     tab1, tab2, tab3 = st.columns(3, gap="small")
 
     with tab1:
-        type1 = 'primary' if st.session_state.current_teacher_tab == 'take_attendance' else "secondary"
-        if st.button("Take Attendance", type=type1, width="stretch", icon=':material/ar_on_you:'):
+        type1 = (
+            "primary"
+            if st.session_state.current_teacher_tab == "take_attendance"
+            else "secondary"
+        )
+
+        if st.button(
+            "Take Attendance",
+            type=type1,
+            width="stretch",
+            icon=":material/ar_on_you:"
+        ):
             st.session_state.current_teacher_tab = "take_attendance"
             st.rerun()
 
     with tab2:
-        type2 = 'primary' if st.session_state.current_teacher_tab == 'manage_subjects' else "secondary"
-        if st.button("Manage Subjects", type=type2, width="stretch", icon=':material/book_ribbon:'):
+        type2 = (
+            "primary"
+            if st.session_state.current_teacher_tab == "manage_subjects"
+            else "secondary"
+        )
+
+        if st.button(
+            "Manage Subjects",
+            type=type2,
+            width="stretch",
+            icon=":material/book_ribbon:"
+        ):
             st.session_state.current_teacher_tab = "manage_subjects"
             st.rerun()
 
     with tab3:
-        type3 = 'primary' if st.session_state.current_teacher_tab == 'attendance_records' else "secondary"
-        if st.button("Attendance Records", type=type3, width="stretch", icon=':material/cards_stack:'):
+        type3 = (
+            "primary"
+            if st.session_state.current_teacher_tab == "attendance_records"
+            else "secondary"
+        )
+
+        if st.button(
+            "Attendance Records",
+            type=type3,
+            width="stretch",
+            icon=":material/cards_stack:"
+        ):
             st.session_state.current_teacher_tab = "attendance_records"
             st.rerun()
 
     st.divider()
 
+    # Render selected dashboard content
     if st.session_state.current_teacher_tab == "take_attendance":
         teacher_tab_take_attendance()
-    if st.session_state.current_teacher_tab == "manage_subjects":
+
+    elif st.session_state.current_teacher_tab == "manage_subjects":
         teacher_tab_manage_subjects()
-    if st.session_state.current_teacher_tab == "attendance_records":
+
+    elif st.session_state.current_teacher_tab == "attendance_records":
         teacher_tab_attendance_records()
+
 
 
 def teacher_tab_take_attendance():
@@ -258,7 +329,7 @@ def teacher_tab_manage_subjects():
     with col1:
         st.markdown("""
             <h3 style="
-                color: #F1F5F9 !important;
+                color: #25243A !important;
                 font-size: 35px;
                 font-weight: 800;
             ">
@@ -382,7 +453,7 @@ def _teacher_auth_styles():
             margin-bottom: 0.55rem !important;
         }
         div[data-testid="stTextInput"] label {
-            color: #CBD5E1 !important;
+            color: #45445D !important;
             font-size: 0.88rem !important;
             font-weight: 600 !important;
             margin-bottom: 0.25rem !important;
@@ -428,7 +499,7 @@ def teacher_screen_login():
     header_left, header_center, header_right = st.columns([1, 2, 1], vertical_alignment="center")
 
     with header_center:
-        header_dashboard()
+        header_dashboard()    
 
     with header_right:
         if st.button("Go back to home", type="secondary", key="loginbackbtn", shortcut='control+backspace'):
@@ -438,12 +509,18 @@ def teacher_screen_login():
     _teacher_auth_styles()
 
     st.markdown("""
-        <div style="text-align:center; margin: 22px 0 10px;">
-            <div style="font-size:12px; font-weight:700; letter-spacing:2px; color:#22D3EE;">TEACHER PORTAL</div>
-            <h2 style="color:#F1F5F9; font-size:32px; margin:6px 0 0;">Welcome back</h2>
-            <p style="color:#94A3B8; margin:4px 0 0; font-size:14px;">Login to manage your classroom</p>
+    <div style="text-align: center; margin: 18px 0 14px; width: 100%;">
+        <div style="font-size: 15px; font-weight: 700; letter-spacing: 2px; color: #22D3EE; text-align: center;">
+            TEACHER PORTAL
         </div>
-    """, unsafe_allow_html=True)
+        <div style="color: #25243A !important; font-size: 32px; font-weight: 700; line-height: 1.2; margin: 6px 0 4px; text-align: center;">
+            Welcome back
+        </div>
+        <div style="color: #5F6078 !important; font-size: 14px; text-align: center;">
+            Login to manage your classroom
+        </div>
+    </div>
+""", unsafe_allow_html=True)
 
     # Narrow centered form on larger screens
     left, form_col, right = st.columns([1, 1.8, 1])
@@ -497,8 +574,8 @@ def teacher_screen_register():
     st.markdown("""
         <div style="text-align:center; margin: 22px 0 10px;">
             <div style="font-size:12px; font-weight:700; letter-spacing:2px; color:#22D3EE;">TEACHER PORTAL</div>
-            <h2 style="color:#F1F5F9; font-size:32px; margin:6px 0 0;">Create your account</h2>
-            <p style="color:#94A3B8; margin:4px 0 0; font-size:14px;">Set up your teacher profile to get started</p>
+            <h2 style="color:#25243A !important; font-size:32px; margin:6px 0 0;">Create your account</h2>
+            <p style="color:#5F6078 !important; margin:4px 0 0; font-size:14px;">Set up your teacher profile to get started</p>
         </div>
     """, unsafe_allow_html=True)
 

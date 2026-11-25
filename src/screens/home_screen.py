@@ -1,7 +1,7 @@
 from pathlib import Path
 import streamlit as st
 from src.components.header import header_home
-from src.ui.base_layouts import style_base_layout, style_background_home
+from src.ui.base_layouts import style_base_layout, style_background_home,set_toolbar_visibility
 
 ASSETS_DIR = Path("assets")
 
@@ -14,28 +14,28 @@ def _apply_home_styles() -> None:
         html, body, [class*="st-"], button { font-family: 'Plus Jakarta Sans', sans-serif !important; }
 
         .sr-hero { text-align:center; padding:.5rem 0 1.5rem; max-width:900px; margin:0 auto; }
-        .sr-hero-eyebrow { color:#22D3EE; font-size:.72rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; margin-bottom:.65rem; }
-        .sr-hero-title { font-family:'Space Grotesk',sans-serif !important; font-size:clamp(2rem,4.5vw,3.25rem); line-height:1.12; letter-spacing:-.045em; font-weight:700; color:#F8FAFC; margin:0; text-align:center; }
-        .sr-hero-title span { background:linear-gradient(90deg,#60A5FA,#22D3EE); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-        .sr-hero-copy { color:#94A3B8; font-size:.96rem; line-height:1.65; margin:.75rem auto 0; max-width:640px; text-align:center; }
+        .sr-hero-eyebrow { color:#7866D8; font-size:.72rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; margin-bottom:.65rem; }
+        .sr-hero-title { font-family:'Space Grotesk',sans-serif !important; font-size:clamp(2rem,4.5vw,3.25rem); line-height:1.12; letter-spacing:-.045em; font-weight:700; color:#25243A; margin:0; text-align:center; }
+        .sr-hero-title span { background:linear-gradient(90deg,#9B8AF0,#7866D8); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+        .sr-hero-copy { color:#77758D; font-size:.96rem; line-height:1.65; margin:.75rem auto 0; max-width:640px; text-align:center; }
 
         /* Portal cards */
-        div[data-testid="stVerticalBlockBorderWrapper"] { border:1px solid rgba(96,165,250,.20) !important; border-radius:24px !important; background:linear-gradient(145deg,rgba(19,34,57,.96),rgba(11,17,32,.90)) !important; box-shadow:0 12px 32px rgba(0,0,0,.20); transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease; }
-        div[data-testid="stVerticalBlockBorderWrapper"]:hover { border-color:rgba(34,211,238,.45) !important; box-shadow:0 16px 38px rgba(34,211,238,.07); transform:translateY(-2px); }
-        .sr-role-tag { font-family:'Space Grotesk',sans-serif !important; text-align:center; color:#22D3EE; font-size:1.82rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; margin:.3rem 0 .55rem; }
-        .sr-role-title { text-align:center !important; color:#F1F5F9 !important; font-family:'Space Grotesk',sans-serif !important; font-size:1.30rem; font-weight:700; letter-spacing:-.025em; line-height:1.3; margin:.15rem 0 .45rem; }
-        .sr-role-desc { text-align:center !important; color:#94A3B8 !important; font-size:.86rem; line-height:1.55; min-height:2.8rem; margin:0 auto .45rem; max-width:94%; }
+        div[data-testid="stVerticalBlockBorderWrapper"] { border:1px solid rgba(120,102,216,.16) !important; border-radius:24px !important; background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(249,247,255,.96)) !important; box-shadow:0 12px 32px rgba(54,45,100,.06); transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease; }
+        div[data-testid="stVerticalBlockBorderWrapper"]:hover { border-color:rgba(120,102,216,.32) !important; box-shadow:0 16px 38px rgba(120,102,216,.08); transform:translateY(-2px); }
+        .sr-role-tag { font-family:'Space Grotesk',sans-serif !important; text-align:center; color:#7866D8; font-size:1.82rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; margin:.3rem 0 .55rem; }
+        .sr-role-title { text-align:center !important; color:#25243A !important; font-family:'Space Grotesk',sans-serif !important; font-size:1.30rem; font-weight:700; letter-spacing:-.025em; line-height:1.3; margin:.15rem 0 .45rem; }
+        .sr-role-desc { text-align:center !important; color:#77758D !important; font-size:.86rem; line-height:1.55; min-height:2.8rem; margin:0 auto .45rem; max-width:94%; }
         div[data-testid="stImage"] { display:flex; justify-content:center; align-items:center; margin:.2rem auto .45rem; }
         div[data-testid="stImage"] img { object-fit:contain; padding:0; background:transparent !important; border-radius:0; }
         div[data-testid="stButton"] button[kind="primary"] { border-radius:13px !important; min-height:2.9rem !important; font-family:'Plus Jakarta Sans',sans-serif !important; font-size:.92rem !important; font-weight:700 !important; letter-spacing:.01em; transition:transform .16s ease,box-shadow .16s ease; }
-        div[data-testid="stButton"] button[kind="primary"]:hover { transform:translateY(-1px); box-shadow:0 7px 20px rgba(34,211,238,.20); }
+        div[data-testid="stButton"] button[kind="primary"]:hover { transform:translateY(-1px); box-shadow:0 7px 20px rgba(120,102,216,.16); }
 
-        .sr-feature-card { border:1px solid rgba(148,163,184,.13); border-radius:16px; background:linear-gradient(145deg,rgba(17,28,48,.72),rgba(11,17,32,.55)); padding:1rem 1.05rem; min-height:108px; }
-        .sr-feature-title { color:#E2E8F0; font-size:.9rem; font-weight:700; margin-bottom:.3rem; }
-        .sr-feature-copy { color:#94A3B8; font-size:.78rem; line-height:1.5; margin:0; }
+        .sr-feature-card { border:1px solid rgba(120,102,216,.12); border-radius:16px; background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(247,245,255,.86)); padding:1rem 1.05rem; min-height:108px; }
+        .sr-feature-title { color:#3D3B55; font-size:.9rem; font-weight:700; margin-bottom:.3rem; }
+        .sr-feature-copy { color:#77758D; font-size:.78rem; line-height:1.5; margin:0; }
         .sr-bottom-summary { text-align:center; max-width:680px; margin:1.4rem auto .6rem; }
-        .sr-bottom-summary p { color:#94A3B8 !important; font-size:.94rem; margin:0 !important; }
-        .sr-tagline-below { display:inline-block; color:#22D3EE; font-size:.76rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; margin-top:.45rem; }
+        .sr-bottom-summary p { color:#77758D !important; font-size:.94rem; margin:0 !important; }
+        .sr-tagline-below { display:inline-block; color:#7866D8; font-size:.76rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; margin-top:.45rem; }
         @media(max-width:700px) { .sr-hero{padding-bottom:1rem;} .sr-hero-copy{font-size:.86rem;} .sr-role-title{font-size:1.12rem;} .sr-role-desc{font-size:.82rem;min-height:0;} }
         </style>
         """,
@@ -83,19 +83,32 @@ def _render_highlights() -> None:
 
 
 def _render_bottom_summary() -> None:
-    st.markdown("""
-        <div style="text-align:center;color:#64748B;font-size:.75rem;margin-top:1.5rem;">
-            Powered by AI · Designed for smarter classrooms
-        </div>
+    st.markdown(
+        """
         <section class="sr-bottom-summary">
-            <p>Fast attendance tracking, clear records, and simpler class management. Select your workspace to continue.</p>
-            <div class="sr-tagline-below">AI Attendance System</div>
+
+            <p>
+                Fast attendance tracking, clear records, and simpler
+                class management. Select your workspace to continue.
+            </p>
+
+            <div class="sr-tagline-below">
+                AI Attendance System
+            </div>
+
+            <div class="sr-footer-credit">
+                Powered by AI · Designed for smarter classrooms
+            </div>
+
         </section>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True
+    )
 
 
 def home_screen() -> None:
     header_home()
+    set_toolbar_visibility(True)
     style_background_home()
     style_base_layout()
     _apply_home_styles()

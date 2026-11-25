@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 
@@ -11,39 +12,66 @@ from src.components.dialog_attendance_result import show_attendance_result
 @st.dialog("Voice Attendance")
 def voice_attendance_dialog(selected_subject_id):
 
-    st.markdown(
-        """
+    st.html("""
         <div style="padding:4px 0 12px 0;">
-          <div style="color:#22D3EE;font-size:.72rem;font-weight:800;letter-spacing:.12em;">
-            VOICE-BASED ATTENDANCE
-          </div>
-          <div style="color:#F1F5F9;font-size:1.15rem;font-weight:700;margin-top:4px;">
-            Record and identify students
-          </div>
-          <div style="color:#94A3B8;font-size:.88rem;margin-top:5px;">
-            Ask students to say <strong style="color:#CBD5E1;">“I am present”</strong>.
-            SmartRoll will match the audio with enrolled voice profiles.
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+            <div style="
+                color:#7866D8;
+                font-size:1.2rem;
+                font-weight:800;
+                letter-spacing:.12em;">
+                VOICE-BASED ATTENDANCE
+            </div>
 
-    st.markdown(
-        """
-        <div style="background:#111C30;border:1px solid #26364E;border-radius:14px;
-                    padding:13px 15px;margin:0 0 12px 0;color:#94A3B8;font-size:.85rem;">
-          <span style="color:#22D3EE;font-weight:700;">Recording tips</span><br>
-          Record in a quiet room, speak clearly, and ensure students take turns if possible.
+            <div style="
+                color:#25243A;
+                font-size:1.15rem;
+                font-weight:700;
+                margin-top:4px;">
+                Record and identify students
+            </div>
+
+            <div style="
+                color:#4B5563;
+                font-size:.88rem;
+                margin-top:5px;
+                line-height:1.5;">
+                Ask students to say
+                <strong style="color:#7866D8;">“I am present”</strong>.
+                SmartRoll will match the audio with enrolled voice profiles.
+            </div>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    """)
+
+    st.html("""
+        <div style="
+            background:#F4F1FF;
+            border:1px solid #E8E5F2;
+            border-radius:14px;
+            padding:13px 15px;
+            margin:0 0 12px 0;
+            color:#4B5563;
+            font-size:.85rem;
+            line-height:1.5;">
+
+            <span style="
+                color:#7866D8;
+                font-weight:700;">
+                Recording tips
+            </span>
+
+            <br>
+
+            Record in a quiet room, speak clearly, and ensure students
+            take turns if possible.
+        </div>
+    """)
 
     audio_data = st.audio_input("🎙️ Record classroom audio")
 
     if audio_data is not None:
-        st.caption("Audio captured. Listen to the recording before analyzing if needed.")
+        st.caption(
+            "Audio captured. Listen to the recording before analyzing if needed."
+        )
 
     # Analyze button
     if st.button(
